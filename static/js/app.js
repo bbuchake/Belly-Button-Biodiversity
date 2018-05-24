@@ -14,8 +14,6 @@ Plotly.d3.json("/names", function(error, response) {
     }
   })
   
-  ///////// Default
-
 // Pie chart
 Plotly.d3.json("/samples/BB_940", function(error, response) {
     if (error) return console.warn(error);
@@ -72,11 +70,7 @@ function updateBub(newdata) {
 }
 
 
-
-////////////////////////////////////////
-// Option changed function
-////////////////////////////////////////
-
+//Function for dropdowlist option change
 function optionChanged(sample) {
     var sampURL = `/samples/${sample}`;
     var metaURL = `/metadata/${sample}`;
