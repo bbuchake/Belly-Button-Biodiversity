@@ -48,13 +48,13 @@ def sample_names():
     #Get sample ID from MetaData
     samples = session.query(Metadata.SAMPLEID)
     #Append to BB_ and return as list
-    return ['BB_' + str(name[0]) for name in samples]
+    return jsonify(['BB_' + str(name[0]) for name in samples])
 
 #Create a route that returns a list of OTU descriptions
 @app.route('/otu')
 def otu_desc():
     otu_descs = session.query(Otu.lowest_taxonomic_unit_found)
-    return [desc[0] for desc in otu_descs]
+    return jsonify([desc[0] for desc in otu_descs])
 
 #Create a route that returns MetaData for a given sample.
 @app.route('/metadata/<sample>')
@@ -66,7 +66,7 @@ def metadata_sample(sample):
 @app.route('/wfreq/<sample>')
 def get_wfreq(sample):
     wfreq = session.query(Metadata.WFREQ).filter(Metadata.SAMPLEID == int(sample[3:]))
-    return wfreq
+    return jsonify(wfreq)
 
 #Create a route that returns OTU IDs and Sample Values for a given sample
 @app.route('/samples/<sample>')
@@ -81,7 +81,7 @@ def get_values(sample):
         'otu_ids': otu_list,
         'sample_values': sample_value
     }
-    return result
+    return jsonify(result)
     
 
 if __name__ == "__main__":    
